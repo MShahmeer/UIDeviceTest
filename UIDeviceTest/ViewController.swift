@@ -10,19 +10,19 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var thisDevice: UIDevice = UIDevice.currentDevice()
+    var thisDevice: UIDevice = UIDevice.current()
     
     //Defining NSNotificationCentre Functions
     func batteryStateDidChange() {
         let newBatteryState = thisDevice.batteryState
         switch newBatteryState {
-        case .Charging:
+        case .charging:
             deviceBatteryStateLabel.text = "Charging"
-        case .Full:
+        case .full:
             deviceBatteryStateLabel.text = "Full"
-        case .Unknown:
+        case .unknown:
             deviceBatteryStateLabel.text = "Unknown"
-        case .Unplugged:
+        case .unplugged:
             deviceBatteryStateLabel.text = "Unplugged"
         }
     }
@@ -32,23 +32,23 @@ class ViewController: UIViewController {
     }
     
     func deviceRotated() {
-        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation))
+        if(UIDeviceOrientationIsLandscape(UIDevice.current().orientation))
         {
             deviceOrientationLabel.text = "Landscape"
         }
         
-        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation))
+        if(UIDeviceOrientationIsPortrait(UIDevice.current().orientation))
         {
             deviceOrientationLabel.text = "Portrait"
         }
     }
     
     func proximitySensorActivated() {
-        if self.view.backgroundColor == UIColor.whiteColor() {
-            self.view.backgroundColor = UIColor.blackColor()
+        if self.view.backgroundColor == UIColor.white() {
+            self.view.backgroundColor = UIColor.black()
         }
         else {
-            self.view.backgroundColor = UIColor.whiteColor()
+            self.view.backgroundColor = UIColor.white()
         }
     }
     
@@ -66,15 +66,15 @@ class ViewController: UIViewController {
         
         //Notifications
         thisDevice.beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.deviceRotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.deviceRotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         
-        thisDevice.batteryMonitoringEnabled = true
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.batteryStateDidChange), name: UIDeviceBatteryStateDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.batteryLevelDidChange), name: UIDeviceBatteryLevelDidChangeNotification, object: nil)
+        thisDevice.isBatteryMonitoringEnabled = true
+        NotificationCenter.default.addObserver(self, selector: #selector(self.batteryStateDidChange), name: NSNotification.Name.UIDeviceBatteryStateDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.batteryLevelDidChange), name: NSNotification.Name.UIDeviceBatteryLevelDidChange, object: nil)
         
-        thisDevice.proximityMonitoringEnabled = true
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.proximitySensorActivated), name: UIDeviceProximityStateDidChangeNotification, object: nil)
-        if thisDevice.proximityMonitoringEnabled == true {
+        thisDevice.isProximityMonitoringEnabled = true
+        NotificationCenter.default.addObserver(self, selector: #selector(self.proximitySensorActivated), name: NSNotification.Name.UIDeviceProximityStateDidChange, object: nil)
+        if thisDevice.isProximityMonitoringEnabled == true {
             proximitySensorAvailableLabel.text = "Available"
         }
         else {
@@ -89,13 +89,13 @@ class ViewController: UIViewController {
         deviceBatteryLevelLabel.text = "\(Int(thisDevice.batteryLevel * 100))%"
         
         switch thisDevice.batteryState {
-        case .Charging:
+        case .charging:
             deviceBatteryStateLabel.text = "Charging"
-        case .Full:
+        case .full:
             deviceBatteryStateLabel.text = "Full"
-        case .Unknown:
+        case .unknown:
             deviceBatteryStateLabel.text = "Unknown"
-        case .Unplugged:
+        case .unplugged:
             deviceBatteryStateLabel.text = "Unplugged"
         }
         

@@ -97,6 +97,7 @@
 					3D12737E1CD62A13005E5EE6 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 23VV6NN8PA;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -257,6 +258,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mshahmeer.UIDeviceTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -272,6 +274,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mshahmeer.UIDeviceTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
